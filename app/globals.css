@@ -1,0 +1,498 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* HeirofLightOTF font faces */
+@font-face {
+  font-family: "HeiroLightOTF";
+  src: url("/fonts/HeirofLightOTFRegular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "HeiroLightOTF";
+  src: url("/fonts/HeirofLightOTFBold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Pretendard Light (fallback 포함) */
+@font-face {
+  font-family: "Pretendard-light";
+  src: url("/fonts/Pretendard-Light.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pretendard-bold";
+  src: url("/fonts/Pretendard-Bold.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Pretendard Variable (full family) */
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/PretendardVariable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Enhanced fantasy color palette with mystical variations */
+  /* Core brand colors */
+  --brand-main: #0b1038; /* Deep midnight blue - main background */
+  --brand-sub: #555fff; /* Mystical purple-blue - primary accent */
+  --brand-highlight: #a9d7ff; /* Ethereal light blue - secondary accent */
+  --brand-point: #ffd47a; /* Golden candlelight - warm accent */
+
+  /* Fantasy-themed color extensions */
+  --fantasy-deep: #050818; /* Deeper shadow blue for depth */
+  --fantasy-mystic: #3d4bff; /* Brighter mystical blue for magic effects */
+  --fantasy-ethereal: #c7e4ff; /* Lighter ethereal blue for highlights */
+  --fantasy-ember: #ffb347; /* Warm ember orange for candle effects */
+  --fantasy-shadow: #1a1f4a; /* Mid-tone shadow for layering */
+  --fantasy-starlight: #e6f3ff; /* Starlight white-blue for text highlights */
+
+  /* Converting brand colors to oklch for better color management */
+  --main: oklch(0.135 0.08 264);
+  --sub: oklch(0.65 0.25 264);
+  --highlight: oklch(0.8 0.15 220);
+  --point: oklch(0.8 0.12 85);
+
+  --background: #0b1038;
+  --foreground: var(--main);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--main);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--main);
+  --primary: var(--sub);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: var(--highlight);
+  --secondary-foreground: var(--main);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: var(--point);
+  --accent-foreground: var(--main);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: var(--sub);
+  --chart-1: var(--sub);
+  --chart-2: var(--highlight);
+  --chart-3: var(--point);
+  --chart-4: var(--main);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: var(--main);
+  --sidebar-primary: var(--sub);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: var(--highlight);
+  --sidebar-accent-foreground: var(--main);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: var(--sub);
+}
+
+.dark {
+  /* Enhanced dark mode with deeper fantasy atmosphere */
+  --background: #0b1038;
+  --foreground: var(--fantasy-starlight);
+  --card: var(--fantasy-shadow);
+  --card-foreground: var(--fantasy-starlight);
+  --popover: var(--fantasy-shadow);
+  --popover-foreground: var(--fantasy-starlight);
+  --primary: var(--fantasy-mystic);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: var(--fantasy-shadow);
+  --secondary-foreground: var(--fantasy-ethereal);
+  --muted: var(--fantasy-shadow);
+  --muted-foreground: var(--brand-highlight);
+  --accent: var(--fantasy-ember);
+  --accent-foreground: var(--fantasy-deep);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: var(--fantasy-shadow);
+  --input: var(--fantasy-shadow);
+  --ring: var(--fantasy-mystic);
+  --chart-1: var(--fantasy-mystic);
+  --chart-2: var(--brand-highlight);
+  --chart-3: var(--fantasy-ember);
+  --chart-4: var(--fantasy-ethereal);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --sidebar: var(--fantasy-deep);
+  --sidebar-foreground: var(--fantasy-starlight);
+  --sidebar-primary: var(--fantasy-mystic);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: var(--fantasy-shadow);
+  --sidebar-accent-foreground: var(--fantasy-ethereal);
+  --sidebar-border: var(--fantasy-shadow);
+  --sidebar-ring: var(--fantasy-mystic);
+}
+
+@theme inline {
+  --font-sans: "HeiroLightOTF", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Roboto Mono", monospace;
+
+  /* Extended fantasy color utilities for Tailwind */
+  --color-brand-main: var(--brand-main);
+  --color-brand-sub: var(--brand-sub);
+  --color-brand-highlight: var(--brand-highlight);
+  --color-brand-point: var(--brand-point);
+
+  /* Fantasy color extensions */
+  --color-fantasy-deep: var(--fantasy-deep);
+  --color-fantasy-mystic: var(--fantasy-mystic);
+  --color-fantasy-ethereal: var(--fantasy-ethereal);
+  --color-fantasy-ember: var(--fantasy-ember);
+  --color-fantasy-shadow: var(--fantasy-shadow);
+  --color-fantasy-starlight: var(--fantasy-starlight);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    position: relative;
+    overflow-x: hidden;
+  }
+  /* 모든 버튼은 기본 포인터 커서 */
+  button,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"] {
+    cursor: pointer;
+  }
+  /* 비활성화 시 가독성을 위한 커서 표시 */
+  button:disabled,
+  input[type="button"]:disabled,
+  input[type="submit"]:disabled {
+    cursor: not-allowed;
+  }
+  /* h태그(및 자식)는 Heiro 유지, 그 외는 Pretendard */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  h1 *,
+  h2 *,
+  h3 *,
+  h4 *,
+  h5 *,
+  h6 * {
+    font-family: "HeiroLightOTF", ui-sans-serif, system-ui, sans-serif;
+  }
+  body :not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(.no-pretendard):not(.no-pretendard *) {
+    font-family: "Pretendard-light", "HeiroLightOTF", ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+/* Enhanced fantasy-themed animations with magical effects */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes magicGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--fantasy-mystic), 0 0 10px var(--fantasy-mystic), 0 0 15px var(--fantasy-mystic);
+    opacity: 0.8;
+  }
+  50% {
+    box-shadow: 0 0 10px var(--fantasy-mystic), 0 0 20px var(--fantasy-mystic), 0 0 30px var(--fantasy-mystic);
+    opacity: 1;
+  }
+}
+
+@keyframes candleFlicker {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    opacity: 0.8;
+    transform: scale(1.05) rotate(1deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(0.98) rotate(-1deg);
+  }
+  75% {
+    opacity: 0.85;
+    transform: scale(1.02) rotate(0.5deg);
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(100px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(100px) rotate(-360deg);
+  }
+}
+
+@keyframes slowFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes mysticalPulse {
+  0%,
+  100% {
+    background-color: var(--fantasy-mystic);
+    transform: scale(1);
+  }
+  50% {
+    background-color: var(--fantasy-ethereal);
+    transform: scale(1.1);
+  }
+}
+
+/* Enhanced cosmic background with magical library atmosphere */
+.cosmic-bg {
+  background: radial-gradient(ellipse at 20% 80%, var(--fantasy-mystic) 15 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, var(--fantasy-ember) 15 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 40%, var(--fantasy-shadow) 0%, var(--fantasy-deep) 50%, #000000 100%);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.star {
+  position: absolute;
+  background: var(--fantasy-ember);
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.magic-orb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--fantasy-ethereal), var(--fantasy-mystic));
+  animation: magicGlow 4s ease-in-out infinite;
+}
+
+.candle-glow {
+  background: radial-gradient(circle, var(--fantasy-ember) 0%, transparent 70%);
+  animation: candleFlicker 2s ease-in-out infinite;
+}
+
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.planet-1 {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle at 30% 30%, var(--fantasy-ethereal), var(--fantasy-mystic));
+  top: 10%;
+  right: 10%;
+  animation-delay: -2s;
+}
+
+.planet-2 {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at 40% 40%, var(--fantasy-mystic), var(--fantasy-deep));
+  bottom: 20%;
+  left: 15%;
+  animation-delay: -4s;
+}
+
+.planet-3 {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle at 50% 50%, var(--fantasy-ember), var(--fantasy-ethereal));
+  top: 30%;
+  left: 5%;
+  animation-delay: -1s;
+}
+
+.floating-element {
+  animation: slowFloat 4s ease-in-out infinite;
+}
+
+/* New fantasy-specific utility classes */
+.mystical-border {
+  border: 1px solid var(--fantasy-mystic);
+  box-shadow: 0 0 10px var(--fantasy-mystic) 25;
+}
+
+.ethereal-glow {
+  box-shadow: 0 0 20px var(--fantasy-ethereal) 30;
+}
+
+.ember-warmth {
+  background: linear-gradient(135deg, var(--fantasy-ember) 20 0%, transparent 100%);
+}
+
+.shadow-depth {
+  background: linear-gradient(180deg, var(--fantasy-shadow) 0%, var(--fantasy-deep) 100%);
+}
+
+.starlight-text {
+  color: var(--fantasy-starlight);
+  text-shadow: 0 0 10px var(--fantasy-starlight) 50;
+}
+
+/* Added marquee animation for flowing sponsor logos */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-seamless {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@layer utilities {
+  /* admin 전용: 루트 내에 #admin-root가 있을 때 헤더/푸터 숨기고 상단 패딩 제거, 배경 흰색 유지 */
+  html:has(#admin-root) body {
+    background-color: white !important;
+    color: #111827 !important; /* neutral-900 */
+  }
+  /* 사이트 전역 헤더/푸터만 숨김: body 바로 아래의 nav, 그리고 body 바로 아래 div 내의 footer */
+  html:has(#admin-root) body > nav,
+  html:has(#admin-root) body > div > footer {
+    display: none !important;
+  }
+  html:has(#admin-root) main {
+    padding-top: 0 !important;
+  }
+  /* admin 전용: 모든 텍스트 Pretendard로 강제 */
+  html:has(#admin-root) body,
+  html:has(#admin-root) body * {
+    font-family: "Pretendard", ui-sans-serif, system-ui, sans-serif !important;
+  }
+  /* 참가작 상세와 동일 폰트/스타일 유지용: 미리보기 섹션 내 헤딩은 Heiro 유지 */
+  html:has(#admin-root) .admin-project-preview h1,
+  html:has(#admin-root) .admin-project-preview h2,
+  html:has(#admin-root) .admin-project-preview h3,
+  html:has(#admin-root) .admin-project-preview h4,
+  html:has(#admin-root) .admin-project-preview h5,
+  html:has(#admin-root) .admin-project-preview h6,
+  html:has(#admin-root) .admin-project-preview h1 *,
+  html:has(#admin-root) .admin-project-preview h2 *,
+  html:has(#admin-root) .admin-project-preview h3 *,
+  html:has(#admin-root) .admin-project-preview h4 *,
+  html:has(#admin-root) .admin-project-preview h5 *,
+  html:has(#admin-root) .admin-project-preview h6 * {
+    font-family: "HeiroLightOTF", ui-sans-serif, system-ui, sans-serif !important;
+  }
+  .glow-hover {
+    transition: color 200ms ease, text-shadow 200ms ease, transform 200ms ease, filter 200ms ease;
+  }
+  .glow-hover:hover {
+    text-shadow: 0 0 4px currentColor, 0 0 8px currentColor;
+    filter: drop-shadow(0 0 3px currentColor);
+    transform: translateY(-0.5px);
+  }
+  .font-pretendard {
+    font-family: "Pretendard", "HeiroLightOTF", ui-sans-serif, system-ui, sans-serif;
+  }
+  .pretendard-bold {
+    font-family: "Pretendard-bold", sans-serif;
+  }
+  .font-hero {
+    font-family: "HeiroLightOTF", ui-sans-serif, system-ui, sans-serif;
+  }
+  /* Added marquee animation utility class */
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
+  .animate-marquee-seamless {
+    animation: marquee-seamless 30s linear infinite;
+  }
+  /* Sponsor logos white filter */
+  .sponsor-logos img {
+    filter: brightness(0) invert(1);
+  }
+}
