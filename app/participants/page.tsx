@@ -36,9 +36,10 @@ export default function ParticipantsListPage() {
   const [query, setQuery] = useState("")
   const [genre, setGenre] = useState<string>("전체")
   const [tier, setTier] = useState<"전체" | UiProject["tier"]>("전체")
-  const [order, setOrder] = useState<"recent" | "title">("recent")
+  const [order, setOrder] = useState<"recent" | "title" | "random">("random")
   const [items, setItems] = useState<UiProject[]>([])
   const [loading, setLoading] = useState(true)
+  const [shuffledItems, setShuffledItems] = useState<UiProject[]>([])
   const [error, setError] = useState<string | null>(null)
   const [genreOptions, setGenreOptions] = useState<string[]>([])
 
@@ -46,15 +47,26 @@ export default function ParticipantsListPage() {
   const TIERS: Array<"전체" | UiProject["tier"]> = ["전체", "챌린저", "루키"]
 
   const filtered = useMemo(() => {
-    const base = items
-      .filter((p) => (query ? (p.title + p.team + p.summary).toLowerCase().includes(query.toLowerCase()) : true))
-    return [...base].sort((a, b) => {
-      if (order === "recent") return b.createdAtMs - a.createdAtMs
-      if (order === "title") return a.title.localeCompare(b.title)
-      return 0
-    })
-  }, [items, genre, tier, query, order])
+    // 1. 정렬 방식에 따라 원본 배열 선택
+    // 'random'이면 미리 섞어둔 shuffledItems, 아니면 원본 items
+    const baseArray = order === "random" ? shuffledItems : items;
 
+    // 2. 검색어(query)로 필터링
+    const filteredByQuery = baseArray
+      .filter((p) => (query ? (p.title + p.team + p.summary).toLowerCase().includes(query.toLowerCase()) : true));
+
+    // 3. 'random'이 아닐 경우에만 'recent' 또는 'title' 정렬 수행
+    if (order === "random") {
+      return filteredByQuery; // 이미 셔플 + 필터링된 상태
+    }
+
+    // 'recent' 또는 'title' 정렬
+    return [...filteredByQuery].sort((a, b) => {
+      if (order === "recent") return b.createdAtMs - a.createdAtMs;
+      if (order === "title") return a.title.localeCompare(b.title);
+      return 0;
+    });
+  }, [items, shuffledItems, query, order]); // 👈 의존성 배열 변경! (genre, tier 제거)
   // 장르 옵션 로드 (공개 API)
   useEffect(() => {
     let cancelled = false
@@ -118,6 +130,19 @@ export default function ParticipantsListPage() {
       cancelled = true
     }
   }, [query, genre, tier])
+
+  useEffect(() => { // 게임 리스트 랜덤 정렬
+    const array = [...items];
+    let currentIndex = array.length, randomIndex;
+    
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    
+    setShuffledItems(array);
+  }, [items]) 
 
   return (
     <div className="min-h-screen relative z-10 no-pretendard">
@@ -216,6 +241,9 @@ export default function ParticipantsListPage() {
                 onChange={(e) => setOrder(e.target.value as any)}
                 className="w-full h-11 px-3 rounded-lg bg-white/5 border border-white/20 text-white"
               >
+                <option value="random" className="bg-[#0B1038]">
+                  랜덤 정렬
+                </option>
                 <option value="recent" className="bg-[#0B1038]">
                   최근 등록순
                 </option>
