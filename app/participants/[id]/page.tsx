@@ -145,7 +145,7 @@ export default function ParticipantDetailPage({ params }: Params) {
         <Card className="md:col-span-2 bg-brand-main/40 border-brand-sub/20 backdrop-blur-sm">
           <CardContent className="p-6 space-y-4">
             <h2 className="text-xl font-semibold text-white">프로젝트 소개</h2>
-            <p className="text-brand-highlight text-sm leading-relaxed">{data.description || ""}</p>
+            <p className="text-brand-highlight text-sm leading-relaxed whitespace-pre-line">{data.description || ""}</p>
             {embedUrl && (
               <div className="aspect-video w-full rounded-lg overflow-hidden border border-white/10 bg-black/50">
                 <iframe
