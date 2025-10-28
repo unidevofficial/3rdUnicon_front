@@ -194,7 +194,7 @@ export default function ParticipantDetailPage({ params }: Params) {
               </div>
             )}
             {data.download_url && (
-              <div className="pt-2"> {/* 👈 pt-2를 줘서 비디오가 없을 때도 일관된 간격을 줘요 */}
+              <div className="pt-2">
                 <Button asChild className="w-full bg-brand-sub hover:bg-brand-sub/80 text-white">
                   <a href={data.download_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
                     다운로드 링크 <ExternalLink className="h-4 w-4" />
