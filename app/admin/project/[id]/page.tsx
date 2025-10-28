@@ -10,7 +10,7 @@ type UpdateBody = {
   team_type?: string
   team_name?: string | null
   genres?: string[] | null
-  platform?: string | null
+  platform?: string[] | null
   video_url?: string | null
   banner_image?: string | null
   gallery_images?: string[] | null
@@ -25,7 +25,7 @@ type ProjectDetail = {
   team_name?: string | null
   genres?: string[] | null
   genre_ids?: string[] | null
-  platform?: string | null
+  platform?: string[] | null
   video_url?: string | null
   banner_image?: string | null
   gallery_images?: string[] | null
@@ -34,7 +34,7 @@ type ProjectDetail = {
 }
 
 const DEFAULT_GENRES = ["RPG", "FPS", "퍼즐", "시뮬", "기타"] as const
-const PLATFORMS = ["pc", "mobile"] as const
+const PLATFORMS = ["pc", "mobile", "web"] as const
 const TEAM_TYPES = ["challenger", "rookie"] as const
 
 export default function AdminProjectDetailPage() {
@@ -57,7 +57,7 @@ export default function AdminProjectDetailPage() {
   const [genres, setGenres] = useState<string[]>([])
   const [genreSuggest, setGenreSuggest] = useState<{ id: string; name: string }[]>([])
   const [genreLoading, setGenreLoading] = useState(false)
-  const [platform, setPlatform] = useState<(typeof PLATFORMS)[number] | "">("")
+  const [platform, setPlatform] = useState<string[]>([]) // 👈 배열 state로 변경
   const [videoUrl, setVideoUrl] = useState("")
   const [downloadUrl, setDownloadUrl] = useState("")
   const [bannerImage, setBannerImage] = useState("")
@@ -184,7 +184,7 @@ export default function AdminProjectDetailPage() {
               ? ((data as any).genres as string[]).filter((g) => typeof g === "string" && g.trim().length > 0)
               : []
           )
-          setPlatform((data.platform as any) || "")
+          setPlatform(Array.isArray(data.platform) ? data.platform : [])
           setVideoUrl(data.video_url || "")
           setDownloadUrl((data as any).download_url || "")
           setBannerImage(data.banner_image || "")
@@ -277,7 +277,7 @@ export default function AdminProjectDetailPage() {
         team_name: teamName.trim() ? teamName.trim() : null,
         description: description.trim() ? description.trim() : null,
         genres: genres.length ? genres : null,
-        platform: platform || null,
+        platform: platform.length ? platform : null,
         video_url: videoUrl.trim() || null,
         banner_image: bannerImage.trim() || null,
         gallery_images: galleryCombined.length ? galleryCombined : null,
@@ -452,7 +452,7 @@ export default function AdminProjectDetailPage() {
                     {genres.filter((g) => typeof g === "string" && g.trim().length > 0).map((g) => (
                       <span key={g} className="inline-flex items-center gap-1 rounded bg-neutral-100 px-2 py-0.5 text-xs">
                         {g}
-                        <button type="button" onClick={() => removeGenre(g)} aria-label="remove" className="ml-1 text-neutral-500 hover:text-neutral-700">×</button>
+                        <button type="button" onClick={() => removeGenre(g)} aria-label="remove" className="ml-1 text-neutral-500 hover:text-neutral-700">x</button>
                       </span>
                     ))}
                   </div>
@@ -486,20 +486,32 @@ export default function AdminProjectDetailPage() {
                   ) : null}
                 </div>
               </div>
-              <div className="flex flex-col">
-                <label className="mb-1 text-[11px] font-medium uppercase tracking-wide text-neutral-500">플랫폼</label>
-                <select
-                  value={platform}
-                  onChange={(e) => setPlatform(e.target.value as any)}
-                  className="rounded-md border border-neutral-300 bg-white px-2.5 py-2 text-sm focus:border-brand-main focus:outline-none focus:ring-2 focus:ring-brand-main/30"
-                >
-                  <option value="">선택</option>
-                  {PLATFORMS.map((p) => (
-                    <option key={p} value={p}>{p === "pc" ? "PC" : "모바일"}</option>
-                  ))}
-                </select>
               </div>
-            </div>
+             <div className="flex flex-col">
+                <label className="mb-1 text-[11px] font-medium uppercase tracking-wide text-neutral-500">플랫폼</label>
+                <div className="flex items-center gap-4 rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm">
+                  {PLATFORMS.map((p) => (
+                    <label key={p} className="flex items-center gap-1.5 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value={p}
+                        checked={platform.includes(p)}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setPlatform((prev) =>
+                            prev.includes(value)
+                              ? prev.filter((item) => item !== value) // 체크 해제: 배열에서 제거
+                              : [...prev, value] // 체크: 배열에 추가
+                          );
+                        }}
+                        className="h-4 w-4 rounded text-brand-main focus:ring-brand-main/30"
+                      />
+                      {/* 'web'일 때 'Web'이라고 표시하도록 추가 */}
+                      <span>{p === "pc" ? "PC" : p === "mobile" ? "모바일" : "Web"}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
 
             <div className="flex flex-col">
               <label className="mb-1 text-[11px] font-medium uppercase tracking-wide text-neutral-500">설명</label>
@@ -675,7 +687,11 @@ export default function AdminProjectDetailPage() {
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-wide text-neutral-500">플랫폼</div>
-                  <div className="mt-1 text-neutral-800">{project.platform || "-"}</div>
+                  <div className="mt-1 text-neutral-800">
+                    {Array.isArray(project.platform) && project.platform.length 
+                      ? project.platform.join(", ") 
+                      : "-"}
+                  </div>
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-wide text-neutral-500">작성일</div>

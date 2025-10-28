@@ -10,7 +10,7 @@ type CreateBody = {
   team_type: string
   team_name?: string | null
   genres?: string[] | null
-  platform?: string | null
+  platform?: string[] | null
   video_url?: string | null
   banner_image?: string | null
   gallery_images?: string[] | null
@@ -18,7 +18,7 @@ type CreateBody = {
 }
 
 const DEFAULT_GENRES = ["RPG", "FPS", "퍼즐", "시뮬", "기타"] as const
-const PLATFORMS = ["pc", "mobile"] as const
+const PLATFORMS = ["pc", "mobile", "web"] as const
 const TEAM_TYPES = ["challenger", "rookie"] as const
 
 export default function AdminProjectNewPage() {
@@ -35,7 +35,7 @@ export default function AdminProjectNewPage() {
   const [genres, setGenres] = useState<string[]>([])
   const [genreSuggest, setGenreSuggest] = useState<{ id: string; name: string }[]>([])
   const [genreLoading, setGenreLoading] = useState(false)
-  const [platform, setPlatform] = useState<(typeof PLATFORMS)[number] | "">("")
+  const [platform, setPlatform] = useState<string[]>([])
   const [videoUrl, setVideoUrl] = useState("")
   const [downloadUrl, setDownloadUrl] = useState("")
   const [bannerImage, setBannerImage] = useState("")
@@ -124,7 +124,7 @@ export default function AdminProjectNewPage() {
         team_name: teamName.trim() ? teamName.trim() : null,
         description: description.trim() ? description.trim() : null,
         genres: (genres.length ? genres : null),
-        platform: platform || null,
+        platform: platform.length ? platform : null,
         video_url: videoUrl.trim() || null,
         banner_image: bannerImage.trim() || null,
         gallery_images: galleryCombined.length ? galleryCombined : null,
@@ -347,16 +347,28 @@ export default function AdminProjectNewPage() {
             </div>
             <div className="flex flex-col">
               <label className="mb-1 text-[11px] font-medium uppercase tracking-wide text-neutral-500">플랫폼</label>
-              <select
-                value={platform}
-                onChange={(e) => setPlatform(e.target.value as any)}
-                className="rounded-md border border-neutral-300 bg-white px-2.5 py-2 text-sm focus:border-brand-main focus:outline-none focus:ring-2 focus:ring-brand-main/30"
-              >
-                <option value="">선택</option>
+              <div className="flex items-center gap-4 rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm">
                 {PLATFORMS.map((p) => (
-                  <option key={p} value={p}>{p === "pc" ? "PC" : "모바일"}</option>
+                  <label key={p} className="flex items-center gap-1.5 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      value={p}
+                      checked={platform.includes(p)}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setPlatform((prev) =>
+                          prev.includes(value)
+                            ? prev.filter((item) => item !== value) // 체크 해제: 배열에서 제거
+                            : [...prev, value] // 체크: 배열에 추가
+                        );
+                      }}
+                      className="h-4 w-4 rounded text-brand-main focus:ring-brand-main/30"
+                    />
+                    {/* 'web'일 때 'Web'이라고 표시하도록 수정 */}
+                    <span>{p === "pc" ? "PC" : p === "mobile" ? "모바일" : "Web"}</span>
+                  </label>
                 ))}
-              </select>
+              </div>
             </div>
           </div>
 

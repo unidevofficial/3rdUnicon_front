@@ -8,8 +8,8 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const title = searchParams.get("title") ?? undefined;
     const genre = searchParams.get("genre") ?? undefined;
-    const platform = searchParams.get("platform") ?? undefined; // pc | mobile
-    const teamType = searchParams.get("team_type") ?? undefined; // challenger | rookie
+    const platformQuery = searchParams.get("platform") ?? undefined; // 👈 변수 이름 변경 (예: "pc,mobile")
+    const teamType = searchParams.get("team_type") ?? undefined; // challenger | rookie 
     const page = Math.max(1, Number(searchParams.get("page") || 1));
     const pageSize = Math.min(100, Math.max(1, Number(searchParams.get("pageSize") || 12)));
     const from = (page - 1) * pageSize;
@@ -20,7 +20,10 @@ export async function GET(req: NextRequest) {
 
     if (title) query = query.ilike("title", `%${title}%`);
     if (genre) query = query.contains("genres", [genre]);
-    if (platform) query = query.eq("platform", platform);
+    if (platformQuery) {
+      const platforms = platformQuery.split(','); // "pc,mobile" -> ["pc", "mobile"]
+      query = query.contains("platform", platforms); // eq 대신 contains (@>) 사용
+    }
     if (teamType) query = query.eq("team_type", teamType);
 
     const { data, error, count } = await query.order("created_at", { ascending: false }).range(from, to);

@@ -18,7 +18,7 @@ type ApiDetail = {
   team_type?: "challenger" | "rookie" | null
   team_name?: string | null
   genres?: string[] | null
-  platform?: "pc" | "mobile" | null
+  platform?: string[] | null
   video_url?: string | null
   banner_image?: string | null
   gallery_images?: string[] | null
@@ -110,6 +110,7 @@ export default function ParticipantDetailPage({ params }: Params) {
   const embedUrl = parseYouTubeEmbed(data.video_url)
   const genres = Array.isArray(data.genres) ? data.genres : []
   const gallery = Array.isArray(data.gallery_images) ? data.gallery_images : []
+  const platforms = Array.isArray(data.platform) ? data.platform : []
 
   return (
     <div className="min-h-screen relative z-10">
@@ -133,8 +134,8 @@ export default function ParticipantDetailPage({ params }: Params) {
             {genres.length > 0 ? (
               <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20">장르: {genres.join(", ")}</span>
             ) : null}
-            {data.platform ? (
-              <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20">플랫폼: {data.platform}</span>
+            {platforms.length > 0 ? ( // 👈 data.platform 대신 platforms.length
+              <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20">플랫폼: {platforms.join(", ")}</span> // 👈 .join() 사용
             ) : null}
           </div>
         </div>
@@ -177,10 +178,10 @@ export default function ParticipantDetailPage({ params }: Params) {
                 <span className="text-brand-highlight">{genres.join(", ")}</span>
               </div>
             ) : null}
-            {data.platform ? (
+            {platforms.length > 0 ? ( // 👈 data.platform 대신 platforms.length
               <div className="flex items-center justify-between text-white/90">
                 <span>플랫폼</span>
-                <span className="text-brand-highlight">{data.platform}</span>
+                <span className="text-brand-highlight">{platforms.join(", ")}</span>
               </div>
             ) : null}
             {data.video_url && (

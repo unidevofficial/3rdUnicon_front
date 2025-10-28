@@ -11,7 +11,7 @@ type Project = {
   team_type?: string | null
   team_name?: string | null
   genres?: string[] | null
-  platform?: string | null
+  platform?: string[] | null
   video_url?: string | null
   banner_image?: string | null
   gallery_images?: string[] | null
@@ -37,15 +37,15 @@ export default function AdminProjectPage() {
   const [items, setItems] = useState<Project[]>([])
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  // 상세 페이지로 이동하도록 변경 (모달 제거)
+  const [error, setError] = useState<string | null>(null) // 상세 페이지로 이동하도록 변경 (모달 제거)
 
   // filters (일반 페이지 검색 기능 이식: 제목, 장르, 플랫폼, 팀 타입)
   const [title, setTitle] = useState("")
   const [genre, setGenre] = useState<string | "all">("all")
   const [genreOptions, setGenreOptions] = useState<string[]>([])
-  const [platform, setPlatform] = useState<string | "all">("all")
+  const [platform, setPlatform] = useState<string[]>([])
   const [teamType, setTeamType] = useState<string | "all">("all")
+  const PLATFORMS = ["pc", "mobile", "web"] as const // 👈 이 줄을 추가!
 
   const totalPages = useMemo(() => Math.max(1, Math.ceil(total / pageSize)), [total, pageSize])
   const pageNumbers = useMemo(() => {
@@ -119,7 +119,7 @@ export default function AdminProjectPage() {
         const params: Record<string, string> = { page: String(page), pageSize: String(pageSize) }
         if (title.trim()) params.title = title.trim()
         if (genre !== "all") params.genre = genre
-        if (platform !== "all") params.platform = platform
+        if (platform.length > 0) params.platform = platform.join(",")
         if (teamType !== "all") params.team_type = teamType
         const query = new URLSearchParams(params)
         const res = await fetch(`/api/project?${query.toString()}`, {
@@ -214,18 +214,29 @@ export default function AdminProjectPage() {
             </div>
             <div className="flex flex-col">
               <label className="mb-1 text-[11px] font-medium uppercase tracking-wide text-neutral-500">플랫폼</label>
-              <select
-                className="rounded-md border border-neutral-300 bg-white px-2.5 py-1.5 text-sm focus:border-brand-main focus:outline-none focus:ring-2 focus:ring-brand-main/30"
-                value={platform}
-                onChange={(e) => {
-                  setPlatform(e.target.value)
-                  setPage(1)
-                }}
-              >
-                <option value="all">전체</option>
-                <option value="pc">PC</option>
-                <option value="mobile">모바일</option>
-              </select>
+              {/* 다른 필터(select)와 높이를 맞추기 위해 h-9 클래스 추가 */}
+              <div className="flex items-center gap-4 rounded-md border border-neutral-300 bg-white px-3 py-1.5 text-sm h-9">
+                {PLATFORMS.map((p) => (
+                  <label key={p} className="flex items-center gap-1.5 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      value={p}
+                      checked={platform.includes(p)}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setPlatform((prev) =>
+                          prev.includes(value)
+                            ? prev.filter((item) => item !== value) // 체크 해제
+                            : [...prev, value] // 체크
+                        );
+                        setPage(1); // 👈 다른 필터처럼 1페이지로 리셋
+                      }}
+                      className="h-4 w-4 rounded text-brand-main focus:ring-brand-main/30"
+                    />
+                    <span>{p === "pc" ? "PC" : p === "mobile" ? "모바일" : "Web"}</span>
+                  </label>
+                ))}
+              </div>
             </div>
             <div className="flex flex-col">
               <label className="mb-1 text-[11px] font-medium uppercase tracking-wide text-neutral-500">팀 종류</label>
@@ -307,7 +318,9 @@ export default function AdminProjectPage() {
                     <td className="px-3 py-2 align-middle text-neutral-700">{p.team_name || "-"}</td>
                     <td className="px-3 py-2 align-middle text-neutral-700">{p.team_type || "-"}</td>
                     <td className="px-3 py-2 align-middle text-neutral-700">{Array.isArray(p.genres) && p.genres.length ? p.genres.join(", ") : "-"}</td>
-                    <td className="px-3 py-2 align-middle text-neutral-700">{p.platform || "-"}</td>
+                   <td className="px-3 py-2 align-middle text-neutral-700">
+                      {Array.isArray(p.platform) && p.platform.length ? p.platform.join(", ") : "-"}
+                    </td>
                   </tr>
                 ))
               )}
