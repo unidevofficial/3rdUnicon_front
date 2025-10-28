@@ -191,13 +191,15 @@ export default function ParticipantDetailPage({ params }: Params) {
                     영상 링크 열기 <ExternalLink className="h-4 w-4" />
                   </a>
                 </Button>
-                {data.download_url && (
-                  <Button asChild className="w-full bg-brand-sub hover:bg-brand-sub/80 text-white mt-5">
-                    <a href={data.download_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
-                      다운로드 링크 <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </Button>
-                )}
+              </div>
+            )}
+            {data.download_url && (
+              <div className="pt-2"> {/* 👈 pt-2를 줘서 비디오가 없을 때도 일관된 간격을 줘요 */}
+                <Button asChild className="w-full bg-brand-sub hover:bg-brand-sub/80 text-white">
+                  <a href={data.download_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
+                    다운로드 링크 <ExternalLink className="h-4 w-4" />
+                  </a>
+                </Button>
               </div>
             )}
           </CardContent>
