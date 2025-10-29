@@ -90,6 +90,22 @@ export function Footer() {
               >
                 한국인공지능게임협회
               </a>
+              <a
+                href="https://www.ea.com/ko-kr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-fantasy-ethereal hover:text-[#ffeeb5] transition-colors text-sm "
+              >
+                EA Korea
+              </a>
+              <a
+                href="https://www.devsisters.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-fantasy-ethereal hover:text-[#ffeeb5] transition-colors text-sm "
+              >
+                Devsisters
+              </a>
             </div>
           </div>
           <div className="space-y-4">

@@ -407,6 +407,20 @@ export default function Home() {
                     <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
                       <img src="/aigame.png" alt="AI GAME 로고" className="max-h-12 max-w-full object-contain" />
                     </div>
+                    <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
+                      <img
+                        src="/EA_Korea.png"//  todo : should be modified to Devsisterslogo
+                        alt="EA Korea 로고"
+                        className="max-h-12 max-w-full object-contain"
+                      />
+                    </div>
+                    <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
+                      <img
+                        src="/Devsisters.png"  //  todo : should be modified to Devsisters logo
+                        alt="Devsisters 로고"
+                        className="max-h-12 max-w-full object-contain"
+                      />
+                    </div>
 
                     {/* 두 번째 세트 (완전한 복제) */}
                     <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
@@ -435,6 +449,21 @@ export default function Home() {
                     <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
                       <img src="/aigame.png" alt="AI GAME 로고" className="max-h-12 max-w-full object-contain" />
                     </div>
+                    <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
+                      <img
+                        src="/EA_Korea.png"//  todo : should be modified to Devsisterslogo
+                        alt="EA Korea 로고"
+                        className="max-h-12 max-w-full object-contain"
+                      />
+                    </div>
+                    <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
+                      <img
+                        src="/Devsisters.png"  //  todo : should be modified to Devsisters logo
+                        alt="Devsisters 로고"
+                        className="max-h-12 max-w-full object-contain"
+                      />
+                    </div>
+                    
                   </div>
                 </div>
               </div>

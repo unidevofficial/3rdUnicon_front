@@ -245,6 +245,20 @@ export default function EventOverviewPage() {
                     className="max-h-10 max-w-full object-contain filter brightness-0 invert"
                   />
                 </div>
+                <div className="flex items-center justify-center h-12 w-full">
+                  <img
+                    src="/EA_Korea.png"
+                    alt="EA Korea 로고"
+                    className="max-h-10 max-w-full object-contain filter brightness-0 invert"
+                  />
+                </div>
+                <div className="flex items-center justify-center h-12 w-full">
+                  <img
+                    src="/Devsisters.png"
+                    alt="Devsisters 로고"
+                    className="max-h-10 max-w-full object-contain filter brightness-0 invert"
+                  />
+                </div>
               </div>
             </div>
           </div>
