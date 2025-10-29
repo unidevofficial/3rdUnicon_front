@@ -228,7 +228,7 @@ export default function EventOverviewPage() {
                   <img
                     src="/KRAFTON_Black.png"
                     alt="KRAFTON 로고"
-                    className="max-h-10 max-w-full object-contain filter brightness-0 invert"
+                    className="max-h-8 max-w-full object-contain filter brightness-0 invert"
                   />
                 </div>
                 <div className="flex items-center justify-center h-12 w-full">
@@ -256,7 +256,7 @@ export default function EventOverviewPage() {
                   <img
                     src="/Devsisters.png"
                     alt="Devsisters 로고"
-                    className="max-h-10 max-w-full object-contain filter brightness-0 invert"
+                    className="max-h-8 max-w-full object-contain filter brightness-0 invert"
                   />
                 </div>
               </div>
