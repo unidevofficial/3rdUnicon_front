@@ -219,13 +219,6 @@ export default function EventOverviewPage() {
                 </div>
                 <div className="flex items-center justify-center h-12 w-full">
                   <img
-                    src="/Com2uS_ci_screen.png"
-                    alt="Com2uS 로고"
-                    className="max-h-10 max-w-full object-contain filter brightness-0 invert"
-                  />
-                </div>
-                <div className="flex items-center justify-center h-12 w-full">
-                  <img
                     src="/KOG-LOGO_PNG.png"
                     alt="KOG 로고"
                     className="max-h-10 max-w-full object-contain filter brightness-0 invert"

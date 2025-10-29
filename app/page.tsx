@@ -385,13 +385,6 @@ export default function Home() {
                       <img src="/BI_kr.png" alt="BI 로고" className="max-h-12 max-w-full object-contain" />
                     </div>
                     <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
-                      <img
-                        src="/Com2uS_ci_screen.png"
-                        alt="Com2uS 로고"
-                        className="max-h-12 max-w-full object-contain"
-                      />
-                    </div>
-                    <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
                       <img src="/KOG-LOGO_PNG.png" alt="KOG 로고" className="max-h-12 max-w-full object-contain" />
                     </div>
                     <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
@@ -418,13 +411,6 @@ export default function Home() {
                     {/* 두 번째 세트 (완전한 복제) */}
                     <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
                       <img src="/BI_kr.png" alt="BI 로고" className="max-h-12 max-w-full object-contain" />
-                    </div>
-                    <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
-                      <img
-                        src="/Com2uS_ci_screen.png"
-                        alt="Com2uS 로고"
-                        className="max-h-12 max-w-full object-contain"
-                      />
                     </div>
                     <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
                       <img src="/KOG-LOGO_PNG.png" alt="KOG 로고" className="max-h-12 max-w-full object-contain" />

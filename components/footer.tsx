@@ -51,14 +51,6 @@ export function Footer() {
             <h3 className="text-fantasy-starlight font-semibold text-sm">후원사</h3>
             <div className="space-y-2">
               <a
-                href="https://com2us.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-fantasy-ethereal hover:text-[#ffeeb5] transition-colors text-sm "
-              >
-                Com2uS
-              </a>
-              <a
                 href="https://kog.co.kr"
                 target="_blank"
                 rel="noopener noreferrer"
