@@ -184,7 +184,7 @@ export default function ParticipantDetailPage({ params }: Params) {
                 <span className="text-brand-highlight">{platforms.join(", ")}</span>
               </div>
             ) : null}
-            {data.video_url && (
+            {data.video_url && data.video_url !== "about:blank" && (
               <div className="pt-2">
                 <Button asChild className="w-full bg-brand-sub hover:bg-brand-sub/80 text-white">
                   <a href={data.video_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
@@ -193,7 +193,7 @@ export default function ParticipantDetailPage({ params }: Params) {
                 </Button>
               </div>
             )}
-            {data.download_url && (
+            {data.download_url && data.download_url !== "about:blank" && (
               <div className="pt-2">
                 <Button asChild className="w-full bg-brand-sub hover:bg-brand-sub/80 text-white">
                   <a href={data.download_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
