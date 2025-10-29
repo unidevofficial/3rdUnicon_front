@@ -385,7 +385,7 @@ export default function Home() {
                       <img src="/BI_kr.png" alt="BI 로고" className="max-h-12 max-w-full object-contain" />
                     </div>
                     <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
-                      <img src="/KOG-LOGO_PNG.png" alt="KOG 로고" className="max-h-12 max-w-full object-contain" />
+                      <img src="/KOG-LOGO_PNG.png" alt="KOG 로고" className="max-h-14 max-w-full object-contain" />
                     </div>
                     <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
                       <img src="/KRAFTON_Black.png" alt="KRAFTON 로고" className="max-h-10 max-w-full object-contain" />
@@ -436,7 +436,7 @@ export default function Home() {
                       <img
                         src="/NEOWIZ_CI_FullColor(Horizontal).png"
                         alt="NEOWIZ 로고"
-                        className="max-h-12 max-w-full object-contain"
+                        className="max-h-14 max-w-full object-contain"
                       />
                     </div>
                     <div className="flex items-center justify-center h-16 min-w-[120px] flex-shrink-0">
