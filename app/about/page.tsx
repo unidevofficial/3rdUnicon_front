@@ -1,11 +1,11 @@
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import { ExternalLink } from "lucide-react"
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { ExternalLink } from "lucide-react";
 
 export const metadata = {
   title: "UNIDEV 소개 | UNICON 2025",
   description: "UNIDEV 소개 및 SNS/외부 링크",
-}
+};
 
 export default function AboutPage() {
   return (
@@ -13,7 +13,7 @@ export default function AboutPage() {
       {/* Hero - unified style */}
       <section className="relative -mt-16 md:-mt-24 h-[420px] md:h-[560px] w-full overflow-hidden">
         <Image
-          src="/background.png"
+          src="/newBackground.jpg"
           alt="배경"
           fill
           priority
@@ -21,7 +21,9 @@ export default function AboutPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-60% to-[#0B1038] pointer-events-none" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-          <h1 className="text-5xl md:text-7xl font-bold text-brand-point drop-shadow-md">UNIDEV 소개</h1>
+          <h1 className="text-5xl md:text-7xl font-bold text-brand-point drop-shadow-md">
+            UNIDEV 소개
+          </h1>
           <div
             aria-hidden
             className="mx-auto w-40 md:w-56 h-6 mt-3"
@@ -38,7 +40,7 @@ export default function AboutPage() {
             }}
           />
           <p className="text-white max-w-3xl mx-auto mt-6 font-hero">
-          성장과 네트워킹을 돕는 대학생 커뮤니티입니다.
+            성장과 네트워킹을 돕는 대학생 커뮤니티입니다.
           </p>
         </div>
       </section>
@@ -58,29 +60,42 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-brand-point/30">
             <div className="p-8">
               <div className="text-center mb-8">
-                <h2 className="text-4xl font-bold text-brand-point mb-2">UNIDEV</h2>
-                <p className="text-brand-highlight text-lg">대학생 개발자 커뮤니티</p>
+                <h2 className="text-4xl font-bold text-brand-point mb-2">
+                  UNIDEV
+                </h2>
+                <p className="text-brand-highlight text-lg">
+                  대학생 개발자 커뮤니티
+                </p>
               </div>
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">설립 목적</h3>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    설립 목적
+                  </h3>
                   <p className="text-brand-highlight leading-relaxed">
-                    2023년부터 대학생 개발자들의 성장과 네트워킹을 지원하며, 매년 혁신적인 프로젝트들을 발굴하고
-                    전시하는 플랫폼을 제공하고 있습니다.
+                    2023년부터 대학생 개발자들의 성장과 네트워킹을 지원하며,
+                    매년 혁신적인 프로젝트들을 발굴하고 전시하는 플랫폼을
+                    제공하고 있습니다.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">주요 활동</h3>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    주요 활동
+                  </h3>
                   <ul className="space-y-2 text-brand-highlight">
                     <li className="flex items-start">
                       <span className="text-brand-point mr-2">•</span>
-                      <span>전국 대학생 게임 개발 동아리 연합 전시회 UNICON 개최</span>
+                      <span>
+                        전국 대학생 게임 개발 동아리 연합 전시회 UNICON 개최
+                      </span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-brand-point mr-2">•</span>
-                      <span>전국 대학생 게임 개발 동아리 연합 게임잼 UNIJAM 개최</span>
+                      <span>
+                        전국 대학생 게임 개발 동아리 연합 게임잼 UNIJAM 개최
+                      </span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-brand-point mr-2">•</span>
@@ -94,35 +109,55 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-            
 
             <div className="p-8">
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">비전</h3>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    비전
+                  </h3>
                   <p className="text-brand-highlight leading-relaxed">
-                    대학생 개발자들이 자신의 아이디어를 현실로 만들고, 동료들과 함께 성장할 수 있는 생태계를 구축합니다.
+                    대학생 개발자들이 자신의 아이디어를 현실로 만들고, 동료들과
+                    함께 성장할 수 있는 생태계를 구축합니다.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">성과</h3>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    성과
+                  </h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-4 bg-brand-main/20 rounded-lg">
-                      <div className="text-2xl font-bold text-brand-point">150+</div>
-                      <div className="text-sm text-brand-highlight">UNICON 출품작 수</div>
+                      <div className="text-2xl font-bold text-brand-point">
+                        150+
+                      </div>
+                      <div className="text-sm text-brand-highlight">
+                        UNICON 출품작 수
+                      </div>
                     </div>
                     <div className="text-center p-4 bg-brand-main/20 rounded-lg">
-                      <div className="text-2xl font-bold text-brand-point">25+</div>
-                      <div className="text-sm text-brand-highlight">UNIJAM 작품 수</div>
+                      <div className="text-2xl font-bold text-brand-point">
+                        25+
+                      </div>
+                      <div className="text-sm text-brand-highlight">
+                        UNIJAM 작품 수
+                      </div>
                     </div>
                     <div className="text-center p-4 bg-brand-main/20 rounded-lg">
-                      <div className="text-2xl font-bold text-brand-point">25</div>
-                      <div className="text-sm text-brand-highlight">소속 동아리</div>
+                      <div className="text-2xl font-bold text-brand-point">
+                        25
+                      </div>
+                      <div className="text-sm text-brand-highlight">
+                        소속 동아리
+                      </div>
                     </div>
                     <div className="text-center p-4 bg-brand-main/20 rounded-lg">
-                      <div className="text-2xl font-bold text-brand-point">1300+</div>
-                      <div className="text-sm text-brand-highlight">커뮤니티 멤버</div>
+                      <div className="text-2xl font-bold text-brand-point">
+                        1300+
+                      </div>
+                      <div className="text-sm text-brand-highlight">
+                        커뮤니티 멤버
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -133,7 +168,6 @@ export default function AboutPage() {
       </section>
 
       {/* Feature Section - 소개 */}
-    
 
       {/* Link Section - 외부 링크 */}
       <section className="max-w-5xl mx-auto px-4 pb-20">
@@ -142,7 +176,10 @@ export default function AboutPage() {
           {[
             { label: "공식 사이트", href: "https://unidev.kr" },
             { label: "카카오톡 채널", href: "http://pf.kakao.com/_LxgSvn" },
-            { label: "Instagram", href: "https://www.instagram.com/unidev.official" },
+            {
+              label: "Instagram",
+              href: "https://www.instagram.com/unidev.official",
+            },
           ].map((l) => (
             <a
               key={l.href}
@@ -158,5 +195,5 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
