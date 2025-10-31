@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Megaphone } from "lucide-react"
 import { SectionDivider } from "@/components/section-divider"
+import ImageModal from "@/components/ui/image-modal"
 
 export const metadata = {
   title: "전시회 | UNICON 2025",
@@ -77,7 +78,7 @@ export default function ExhibitionPage() {
           </div>
           <div className=" bg-brand-main/40 border-y border-brand-point/30 p-6 backdrop-blur-sm">
             <div className="w-full rounded-lg overflow-hidden bg-brand-main/20 flex items-center justify-center">
-              <img src="/booth.png" alt="부스 배치도" className="w-4/5 h-auto object-contain" />
+              <ImageModal src="/booth_updated.jpeg" alt="부스 배치도" className="w-4/5 h-auto object-contain" />
             </div>
           </div>
         </div>

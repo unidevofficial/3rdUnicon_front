@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Users } from "lucide-react"
 import { SectionDivider } from "@/components/section-divider"
+import ImageModal from "@/components/ui/image-modal"
 
 // metadata는 server 컴포넌트 레이아웃(app/participants/layout.tsx)에 정의됩니다.
 
@@ -183,7 +184,7 @@ export default function ParticipantsListPage() {
           <SectionDivider />
         </div>
           <div className="mx-auto overflow-hidden bg-brand-main/20 border-y border-brand-point/30 flex items-center justify-center">
-            <img src="/booth.png" alt="부스 배치도" className="max-w-full h-auto object-contain rotate-90 mx-auto" />
+            <ImageModal src="/booth_updated.jpeg" alt="부스 배치도" className="max-w-full mt-10 mb-10 h-auto object-contain mx-auto" />
           </div>
         </section>
 
